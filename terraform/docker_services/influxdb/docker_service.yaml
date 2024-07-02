@@ -1,0 +1,22 @@
+---
+server: account_1
+service:
+  name: influxdb
+  image: influxdb:2.7.6-alpine
+  ports:
+    - internal: 8086
+      external: 8086
+  environment:
+    - name: DOCKER_INFLUXDB_INIT_MODE
+      value: setup
+    - name: DOCKER_INFLUXDB_INIT_USERNAME
+      value: terraform
+    - name: DOCKER_INFLUXDB_INIT_PASSWORD
+      value: "${random_password.influxdb_password.result}"
+    - name: DOCKER_INFLUXDB_INIT_ORG
+      value: draham rabak
+    - name: DOCKER_INFLUXDB_INIT_BUCKET
+      value: profit prophet
+  volumes:
+    - container_path: /var/lib/influxdb
+      host_path: /opt/influxdb/volumes

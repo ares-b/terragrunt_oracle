@@ -1,0 +1,19 @@
+---
+
+- name: User Management | Create group
+  include_tasks:
+    file: create_groups.yml
+    apply:
+      tags:
+        - groups
+  tags:
+    - groups
+
+- name: User Management | Create users
+  include_tasks:
+    file: create_users.yml
+    apply:
+      tags:
+        - users
+  tags:
+    - users

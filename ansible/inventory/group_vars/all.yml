@@ -1,0 +1,13 @@
+---
+
+managed_groups:
+  - name: automated_ops
+    sudo:
+      passwordless: true
+      commands: "ALL"
+
+managed_users:
+  - name: ansible
+    create_home: true
+    groups:
+      - automated_ops

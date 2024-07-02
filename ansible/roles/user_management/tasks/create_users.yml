@@ -1,0 +1,23 @@
+---
+
+- name: User Management | Create Unix Automated Ops users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    state: present
+    group: "{{ item.groups | first }}"
+    groups: "{{ item.groups[1:] }}"
+    shell: /bin/bash
+    create_home: "{{ item.create_home }}"
+  with_items: "{{ managed_users }}"
+  become: true
+
+- name: User Management | Set SSH Authorized Keys
+  ansible.posix.authorized_key:
+    user: "{{ item.0.name }}"
+    state: present
+    key: "{{ item.1 }}"
+  with_subelements: 
+    - "{{ managed_users }}"
+    - ssh_authorized_keys
+    - skip_missing: true
+  become: true

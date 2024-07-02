@@ -1,0 +1,11 @@
+---
+
+- name: Host Config | Update and upgrade apt packages
+  ansible.builtin.apt:
+    state: latest
+    update_cache: true
+  become: true
+
+- name: Host Config | Install Docker
+  include_tasks:
+    file: install_docker.yml

@@ -1,0 +1,17 @@
+---
+
+- name: User Management - Groups | Create Groups
+  group:
+    name: "{{ item.name }}"
+    state: present
+  become: true
+  with_items: "{{ managed_groups }}"
+
+- name: User Management - Groups | Add Groups to Sudoers
+  community.general.sudoers:
+    name: "{{ item.name }}"
+    group: "{{ item.name }}"
+    commands: "{{ item.sudo.commands }}"
+    nopassword: "{{ item.sudo.passwordless }}"
+  with_items: "{{ managed_groups }}"
+  become: true

@@ -1,0 +1,10 @@
+---
+ingress_rules:
+  - protocol: "6"
+    source: "0.0.0.0/0"
+    min_port: 8086
+    max_port: 8086
+  - protocol: "6"
+    source: "0.0.0.0/0"
+    min_port: 22
+    max_port: 22

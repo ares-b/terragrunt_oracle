@@ -1,0 +1,11 @@
+---
+- name: Configure Host
+  gather_facts: true
+  hosts: all
+  tasks:
+    - name: Configure Users
+      ansible.builtin.include_role:
+        name: user_management
+    - name: Configure Docker
+      ansible.builtin.include_role:
+        name: docker_host
