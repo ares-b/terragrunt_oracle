@@ -18,12 +18,7 @@ generate "provider" {
     })
 }
 
-inputs = {
-    service = {
-        name = "influxdb"
-        image = "influxdb:2.7.6-alpine"
-    }
-}
+inputs = local.docker_service.service
 
 terraform {
   source = "${get_terragrunt_dir()}/../../modules/docker_service"
